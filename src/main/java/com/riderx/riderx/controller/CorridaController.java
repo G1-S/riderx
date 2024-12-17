@@ -21,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.riderx.riderx.model.Corrida;
 import com.riderx.riderx.repository.CorridaRepository;
 import com.riderx.riderx.repository.VeiculoRepository;
+import com.riderx.riderx.service.CorridaService;
 
 import jakarta.validation.Valid;
 
@@ -34,6 +35,9 @@ public class CorridaController {
 
 	@Autowired
 	private VeiculoRepository veiculoRepository;
+	
+	@Autowired
+	private CorridaService corridaService;
 
 	@GetMapping("/all")
 	public ResponseEntity<List<Corrida>> getAll() {
@@ -82,4 +86,10 @@ public class CorridaController {
 
 		corridaRepository.deleteById(id);
 	}
+	
+	@GetMapping("/tempo/{id}/{velocidade}")
+	public String calcularTempoCorrida(@PathVariable Long id, @PathVariable Double velocidade) {
+		return corridaService.calculoViagem(id, velocidade);
+	}
+	
 }

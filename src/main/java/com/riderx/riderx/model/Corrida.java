@@ -30,11 +30,14 @@ public class Corrida {
 	@NotNull(message = "O Atributo status é obrigatório")
 	private String status;
 	
+	@NotNull(message = "O Atributo distância é obrigatório")
+	private Double distancia;
+	
 	@ManyToOne
 	@JsonIgnoreProperties("corrida")
 	private Veiculo veiculo;
 	
-
+	
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
@@ -82,4 +85,14 @@ public class Corrida {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public Double getDistancia() {
+		return distancia;
+	}
+		
+	public void setDistancia(Double distancia) {
+		this.distancia = distancia;
+		
+	}
+	
 }
