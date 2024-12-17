@@ -10,26 +10,22 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_corridas")
 public class Corrida {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@NotNull(message = "O Atributo origem é obrigatório")
-    private String origem;
-	
+	private String origem;
+
 	@NotNull(message = "O Atributo destino é obrigatório")
-    private String destino;
-	
+	private String destino;
+
 	@NotNull(message = "O Atributo vagas é obrigatório")
-    private Integer vagas;
-	
+	private Integer vagas;
+
 	@NotNull(message = "O Atributo status é obrigatório")
-    private String status;
-	
-	//motorista_id
-	
-	//passageiro_id
+	private String status;
 
 	public Long getId() {
 		return id;
