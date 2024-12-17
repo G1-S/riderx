@@ -1,9 +1,12 @@
 package com.riderx.riderx.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -26,6 +29,19 @@ public class Corrida {
 
 	@NotNull(message = "O Atributo status é obrigatório")
 	private String status;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("corrida")
+	private Veiculo veiculo;
+	
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
 
 	public Long getId() {
 		return id;
