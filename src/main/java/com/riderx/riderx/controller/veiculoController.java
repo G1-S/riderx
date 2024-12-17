@@ -24,14 +24,14 @@ import com.riderx.riderx.repository.VeiculoRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/veiculo")
+@RequestMapping("/veiculos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class veiculoController {
+public class  VeiculoController {
 
 	@Autowired
 	private VeiculoRepository veiculoRepository;
 
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<Veiculo>> getAll() {
 		return ResponseEntity.ok(veiculoRepository.findAll());
 	}
