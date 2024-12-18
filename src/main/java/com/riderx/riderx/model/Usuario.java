@@ -39,7 +39,7 @@ public class Usuario {
 	private String telefone;
 
 	@NotBlank
-	@Size(min = 8)
+	@Size(min = 8, message = "O Atributo senha deve ter no minimo 8 caracteres")
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z]).*$", message = "A senha deve conter letras e números.")
 	private String senha;
 
@@ -51,9 +51,7 @@ public class Usuario {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Veiculo> veiculo;
-	
-	
-	
+
 	public List<Veiculo> getVeiculo() {
 		return veiculo;
 	}
