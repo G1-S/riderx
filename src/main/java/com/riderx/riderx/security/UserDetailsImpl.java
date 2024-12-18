@@ -8,28 +8,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.riderx.riderx.model.Usuario;
 
+public class UserDetailsImpl implements UserDetails {
 
-
-public class UserDetailsImpl implements UserDetails{
-
-private static final Long serialVersionUID = 1L; 
+	private static final long serialVersionUID = 1L;
 
 	private String userName;
 	private String password;
 	private List<GrantedAuthority> authorities;
-	
+
 	public UserDetailsImpl(Usuario user) {
 		this.userName = user.getUsuario();
 		this.password = user.getSenha();
 	}
-	
-	public UserDetailsImpl() {}
-	
+
+	public UserDetailsImpl() { }
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
-	
+
 	@Override
 	public String getPassword() {
 		return password;
@@ -39,7 +37,7 @@ private static final Long serialVersionUID = 1L;
 	public String getUsername() {
 		return userName;
 	}
-	
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -54,7 +52,7 @@ private static final Long serialVersionUID = 1L;
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean isEnabled() {
 		return true;
