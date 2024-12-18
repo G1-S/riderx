@@ -52,14 +52,6 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private List<Veiculo> veiculo;
 
-	public List<Veiculo> getVeiculo() {
-		return veiculo;
-	}
-
-	public void setVeiculo(List<Veiculo> veiculo) {
-		this.veiculo = veiculo;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -81,7 +73,6 @@ public class Usuario {
 	}
 
 	public void setUsuario(String usuario) {
-
 		this.usuario = usuario;
 	}
 
@@ -91,6 +82,14 @@ public class Usuario {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getFoto() {
@@ -109,12 +108,11 @@ public class Usuario {
 		this.tipo = tipo;
 	}
 
-	public String getSenha() {
-		return senha;
+	public List<Veiculo> getVeiculo() {
+		return veiculo;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setVeiculo(List<Veiculo> veiculo) {
+		this.veiculo = veiculo;
 	}
-
 }
