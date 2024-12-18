@@ -76,4 +76,27 @@ O sistema implementa autenticação e autorização seguras:
 
 ### Cálculo de Tempo de Viagem
 Permite calcular o tempo estimado de viagem de uma corrida com base na fórmula:
+Tempo = Distância / Velocidade
 
+
+O endpoint `GET /corridas/tempo/{id}/{velocidade}` recebe:
+- **id**: O identificador da corrida.
+- **velocidade**: A velocidade média (em km/h).
+
+**Exemplo de uso:**
+1. Localiza a corrida pelo ID.
+2. Valida se a corrida existe.
+3. Calcula o tempo com base na fórmula.
+4. Retorna o tempo estimado de viagem em horas.
+
+Caso a corrida não seja encontrada, uma exceção será lançada.
+
+---
+
+## 👥 Desenvolvedores
+
+- Felix
+- Lyncoln
+- Sandy
+- Mozart
+- Eduarda
