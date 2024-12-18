@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,10 +30,11 @@ public class Usuario {
 	@NotBlank
 	@Size(min = 2, max = 30)
 	private String nome;
-
+	
+	//@Schema(example = "email@email.com.br")
 	@Email(message = "Digite um email válido")
 	@NotBlank
-	private String email;
+	private String usuario;
 
 	@NotBlank(message = " O número de telefone é obrigatorio!!")
 	@Pattern(regexp = "^\\+?[1-9]\\d{1,14}$")
@@ -76,12 +78,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getTelefone() {
