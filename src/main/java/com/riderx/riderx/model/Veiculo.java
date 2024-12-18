@@ -10,6 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -33,28 +34,22 @@ public class Veiculo {
 	@NotBlank(message = "O atributo cor é obrigatorio")
 	@Size(min = 2, max = 60, message = "O atributo cor deve conter no minimo 2 e no maximo 60 caracteres")
 	private String cor;
-	
+
 	@NotNull(message = "O atributo ano é obrigatorio")
 	@Pattern(regexp = "^[0-9]{4}$", message = "O ano deve ser um valor válido com 4 números.")
-    private String ano;
-	
+	private String ano;
+
+	@Pattern(regexp = "^[A-Z]{3}[0-9][A-Z][0-9]{2}$", message = "A placa deve estar no formato AAA1A11, com letras maiúsculas e números.")
+	private String placa;
+
 	@ManyToOne
 	@JsonIgnoreProperties("veiculo")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "veiculo", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("veiculo")
 	private List<Corrida> corrida;
-	
-	
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 	public List<Corrida> getCorrida() {
 		return corrida;
@@ -95,7 +90,20 @@ public class Veiculo {
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
-	
-	
 
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

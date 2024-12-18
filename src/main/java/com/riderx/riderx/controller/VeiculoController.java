@@ -41,6 +41,11 @@ public class  VeiculoController {
 		return veiculoRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
+	
+	@GetMapping("/placa")
+	public ResponseEntity<List<Veiculo>> getByPlaca(@PathVariable String placa) {
+        return ResponseEntity.ok(veiculoRepository.findAllByPlacaContainingIgnoreCase(placa));
+	}
 
 	@PostMapping
 	public ResponseEntity<Veiculo> post(@Valid @RequestBody Veiculo veiculo){

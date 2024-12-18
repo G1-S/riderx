@@ -43,6 +43,11 @@ public class UsuarioController {
 		return usuarioRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.notFound().build());
 	}
+	
+	@GetMapping("/usuario")
+    public ResponseEntity<List<Usuario>>getByUsuario(@PathVariable String usuario) {
+		   return ResponseEntity.ok(usuarioRepository.findAllByUsuarioContainingIgnoreCase(usuario));
+	}
 
 	@PostMapping
 	public ResponseEntity<Usuario> postUsuario(@Valid @RequestBody Usuario usuario) {

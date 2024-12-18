@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +31,9 @@ public class Usuario {
 	@Size(min = 2, max = 30)
 	private String nome;
 
-	@Email(message = "Digite um email válido")
-	@NotBlank
-	private String email;
+	@Email(message = "Digite um usuario válido")
+	@NotBlank (message = "O Atributo usuário é obrigatório!")
+	private String usuario;
 
 	@NotBlank(message = " O número de telefone é obrigatorio!!")
 	@Pattern(regexp = "^\\+?[1-9]\\d{1,14}$")
@@ -76,12 +77,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getTelefone() {
