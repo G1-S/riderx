@@ -1,6 +1,7 @@
 package com.riderx.riderx.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +21,14 @@ public class Carona {
 	
 	@ManyToOne
 	@JoinColumn(name = "passageiro_id", nullable = false)
-	@JsonBackReference
+	@JsonIgnoreProperties("carona")
 	private Usuario passageiroId;
 	
 	@ManyToOne
-	@JoinColumn(name = "corrida_id")
-	@JsonBackReference
-	private Corrida corrida;
+    @JoinColumn(name = "corrida_id")
+    @JsonBackReference
+    private Corrida corrida;
+	
 
 	public Long getId() {
 		return id;

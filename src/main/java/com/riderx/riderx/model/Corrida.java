@@ -3,6 +3,7 @@ package com.riderx.riderx.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -44,12 +45,19 @@ public class Corrida {
 	@NotBlank(message = "Tipo de pagamento é obrigatório")
 	public String tipoPagamento;
 	
+	@NotBlank(message = "O atributo data é obrigatório")
+	public String dataViagem;
+	
+	@NotBlank(message = "O atributo hora é obrigatório")
+	public String horaViagem;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "corrida", cascade = CascadeType.REMOVE)
 	@JsonManagedReference
 	private List<Carona> caronas;
 	
 	@ManyToOne
 	@JoinColumn(name = "motorista_id", nullable = false)
+	@JsonBackReference
 	private Usuario usuario;
 
 	public Long getId() {

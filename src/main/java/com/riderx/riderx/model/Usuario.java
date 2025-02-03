@@ -2,7 +2,7 @@ package com.riderx.riderx.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -71,7 +71,7 @@ public class Usuario {
 	private String carroPlaca;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
+	@JsonBackReference
 	private List<Corrida> corridas;
 	
 	public Long getId() {
