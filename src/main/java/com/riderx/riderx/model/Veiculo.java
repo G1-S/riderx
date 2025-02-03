@@ -26,6 +26,10 @@ public class Veiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank(message = "O atributo marca é obrigatorio")
+	@Size(min = 2, max = 60, message = "O atributo marca deve conter no minimo 2 e no maximo 60 caracteres")
+	private String marca;
 
 	@NotBlank(message = "O atributo modelo é obrigatorio")
 	@Size(min = 2, max = 60, message = "O atributo modelo deve conter no minimo 2 e no maximo 60 caracteres")
@@ -65,6 +69,15 @@ public class Veiculo {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
 
 	public String getModelo() {

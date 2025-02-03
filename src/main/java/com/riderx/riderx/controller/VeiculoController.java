@@ -42,7 +42,7 @@ public class  VeiculoController {
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
-	@GetMapping("/placa")
+	@GetMapping("/placa/{placa}")
 	public ResponseEntity<List<Veiculo>> getByPlaca(@PathVariable String placa) {
         return ResponseEntity.ok(veiculoRepository.findAllByPlacaContainingIgnoreCase(placa));
 	}

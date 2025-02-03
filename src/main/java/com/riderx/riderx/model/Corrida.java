@@ -1,14 +1,21 @@
 package com.riderx.riderx.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_corridas")
@@ -33,9 +40,16 @@ public class Corrida {
 	@NotNull(message = "O Atributo distância é obrigatório")
 	private Double distancia;
 	
+	@NotNull(message = "Digite 1 se for cédito ou 0 para débito.")
+	public Boolean pagamento;
+	
 	@ManyToOne
 	@JsonIgnoreProperties("corrida")
 	private Veiculo veiculo;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("corrida")
+	private Usuario usuario;
 	
 	
 	public Veiculo getVeiculo() {
@@ -94,5 +108,22 @@ public class Corrida {
 		this.distancia = distancia;
 		
 	}
+
+	public Boolean getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Boolean pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 	
 }
