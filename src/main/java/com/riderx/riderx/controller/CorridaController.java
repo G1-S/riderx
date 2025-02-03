@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.riderx.riderx.model.Corrida;
 import com.riderx.riderx.repository.CorridaRepository;
-import com.riderx.riderx.repository.VeiculoRepository;
+import com.riderx.riderx.repository.CaronaRepository;
 import com.riderx.riderx.service.CorridaService;
 
 import jakarta.validation.Valid;
@@ -34,7 +34,7 @@ public class CorridaController {
 	private CorridaRepository corridaRepository;
 
 	@Autowired
-	private VeiculoRepository veiculoRepository;
+	private CaronaRepository veiculoRepository;
 	
 	@Autowired
 	private CorridaService corridaService;

@@ -2,6 +2,7 @@ package com.riderx.riderx.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -10,6 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -41,22 +43,21 @@ public class Corrida {
 	private Double distancia;
 	
 	@NotNull(message = "Digite 1 se for cédito ou 0 para débito.")
-	public Boolean pagamento;
+	public Boolean tipoPagamento;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("corrida")
-	private Veiculo veiculo;
+	private Carona veiculo;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("corrida")
+	@JoinColumn(name = "motorista_id", nullable = false)
 	private Usuario usuario;
 	
-	
-	public Veiculo getVeiculo() {
+	public Carona getVeiculo() {
 		return veiculo;
 	}
 
-	public void setVeiculo(Veiculo veiculo) {
+	public void setVeiculo(Carona veiculo) {
 		this.veiculo = veiculo;
 	}
 
@@ -109,12 +110,12 @@ public class Corrida {
 		
 	}
 
-	public Boolean getPagamento() {
-		return pagamento;
+	public Boolean getTipoPagamento() {
+		return tipoPagamento;
 	}
 
-	public void setPagamento(Boolean pagamento) {
-		this.pagamento = pagamento;
+	public void setTipoPagamento(Boolean tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
 	}
 
 	public Usuario getUsuario() {
@@ -123,7 +124,6 @@ public class Corrida {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-	
+	}	
 	
 }

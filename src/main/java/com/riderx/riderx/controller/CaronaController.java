@@ -18,57 +18,52 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.riderx.riderx.model.Veiculo;
-import com.riderx.riderx.repository.VeiculoRepository;
+import com.riderx.riderx.model.Carona;
+import com.riderx.riderx.repository.CaronaRepository;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/veiculos")
+@RequestMapping("/caronas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class  VeiculoController {
+public class  CaronaController {
 
 	@Autowired
-	private VeiculoRepository veiculoRepository;
+	private CaronaRepository caronaRepository;
 
 	@GetMapping("/all")
-	public ResponseEntity<List<Veiculo>> getAll() {
-		return ResponseEntity.ok(veiculoRepository.findAll());
+	public ResponseEntity<List<Carona>> getAll() {
+		return ResponseEntity.ok(caronaRepository.findAll());
 	}
 
 	@GetMapping("/id/{id}")
-	public ResponseEntity<Veiculo> getById(@PathVariable Long id) {
-		return veiculoRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
+	public ResponseEntity<Carona> getById(@PathVariable Long id) {
+		return caronaRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
-	@GetMapping("/placa/{placa}")
-	public ResponseEntity<List<Veiculo>> getByPlaca(@PathVariable String placa) {
-        return ResponseEntity.ok(veiculoRepository.findAllByPlacaContainingIgnoreCase(placa));
-	}
-
 	@PostMapping
-	public ResponseEntity<Veiculo> post(@Valid @RequestBody Veiculo veiculo){
+	public ResponseEntity<Carona> post(@Valid @RequestBody Carona carona){
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(veiculoRepository.save(veiculo));
+				.body(caronaRepository.save(carona));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Veiculo> put(@Valid @RequestBody Veiculo veiculo){
-		return veiculoRepository.findById(veiculo.getId())
-				.map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(veiculoRepository.save(veiculo)))
+	public ResponseEntity<Carona> put(@Valid @RequestBody Carona carona){
+		return caronaRepository.findById(carona.getId())
+				.map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(caronaRepository.save(carona)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("id/{id}")
 	public void delete(@PathVariable Long id) {
-		Optional<Veiculo> veiculo = veiculoRepository.findById(id);
+		Optional<Carona> carona = caronaRepository.findById(id);
 		
-		if(veiculo.isEmpty())
+		if(carona.isEmpty())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		
-		veiculoRepository.deleteById(id);
+		caronaRepository.deleteById(id);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.riderx.riderx.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -50,60 +51,32 @@ public class Usuario {
 	@NotNull(message = "Digite 1 se for motorista ou 0 para passageiro...")
 	private Boolean tipo; // se for 1 significa que é motorista
 	
-	@NotBlank
-	@Size(min = 5, message = "Digite um endereço válido.")
-	private String enderecoCasa;
-	
-	@NotBlank
-	@Size(min = 5, message = "Digite um endereço válido.")
-	private String enderecoTrabalho;
-	
-	@NotNull(message = "O método de pagamento é obrigatório.")
 	@Size(min = 16, max = 16)
-	public String numeroCartao;
+	public String cartaoNumero; 
 	
-	@NotNull(message = "Digite o código de segurança")
 	@Size(min = 3, max = 3)
-	public String cvv;
+	public String cartaoCVV;
 	
-	@NotNull(message = "Digite o nome no Cartão.")
 	@Size(min = 7, max = 50)
-	public String nomeCartao;
+	public String cartaoNome; 
 	
-	@NotNull(message = "Digite a data de expiração: DD/AA")
 	@Size(min = 5, max = 5)
-	public String dataExpiracao;
+	public String cartaoExpiracao; 
 	
+	private String carroMarca;
+	
+	private String carroModelo;
+	
+	private String carroCor;
+	
+	private String carroAno;
+	
+	private String carroPlaca;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
-	private List<Veiculo> veiculo;
+	@JsonManagedReference
+	private List<Corrida> corridas;
 	
-	@ManyToOne
-	@JsonIgnoreProperties("usuario")
-	private Corrida corrida;
-	
-	public Usuario(Long id, String nome, String usuario, String telefone, String senha, String foto, Boolean tipo,
-			String enderecoCasa, String enderecoTrabalho, String numeroCartao, String cvv, String nomeCartao, String dataExpiracao) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.usuario = usuario;
-		this.telefone = telefone;
-		this.senha = senha;
-		this.foto = foto;
-		this.tipo = tipo;
-		this.enderecoCasa = enderecoCasa;
-		this.enderecoTrabalho = enderecoTrabalho;
-		this.numeroCartao = numeroCartao;
-		this.cvv = cvv;
-		this.nomeCartao = nomeCartao;
-		this.dataExpiracao = dataExpiracao;
-	}
-
-	public Usuario() {	}
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -159,68 +132,87 @@ public class Usuario {
 	public void setTipo(Boolean tipo) {
 		this.tipo = tipo;
 	}
-
-	public String getEnderecoCasa() {
-		return enderecoCasa;
+	
+	
+	public String getCartaoNumero() {
+		return cartaoNumero;
 	}
 
-	public void setEnderecoCasa(String enderecoCasa) {
-		this.enderecoCasa = enderecoCasa;
+	public void setCartaoNumero(String cartaoNumero) {
+		this.cartaoNumero = cartaoNumero;
 	}
 
-	public String getEnderecoTrabalho() {
-		return enderecoTrabalho;
+	public String getCartaoCVV() {
+		return cartaoCVV;
 	}
 
-	public void setEnderecoTrabalho(String enderecoTrabalho) {
-		this.enderecoTrabalho = enderecoTrabalho;
+	public void setCartaoCVV(String cartaoCVV) {
+		this.cartaoCVV = cartaoCVV;
 	}
 
-	public String getNumeroCartao() {
-		return numeroCartao;
+	public String getCartaoNome() {
+		return cartaoNome;
 	}
 
-	public void setNumeroCartao(String numeroCartao) {
-		this.numeroCartao = numeroCartao;
+	public void setCartaoNome(String cartaoNome) {
+		this.cartaoNome = cartaoNome;
 	}
 
-	public String getCvv() {
-		return cvv;
+	public String getCartaoExpiracao() {
+		return cartaoExpiracao;
 	}
 
-	public void setCvv(String cvv) {
-		this.cvv = cvv;
+	public void setCartaoExpiracao(String cartaoExpiracao) {
+		this.cartaoExpiracao = cartaoExpiracao;
 	}
 
-	public String getNomeCartao() {
-		return nomeCartao;
+	public String getCarroMarca() {
+		return carroMarca;
 	}
 
-	public void setNomeCartao(String nomeCartao) {
-		this.nomeCartao = nomeCartao;
+	public void setCarroMarca(String carroMarca) {
+		this.carroMarca = carroMarca;
 	}
 
-	public String getDataExpiracao() {
-		return dataExpiracao;
+	public String getCarroModelo() {
+		return carroModelo;
 	}
 
-	public void setDataExpiracao(String dataExpiracao) {
-		this.dataExpiracao = dataExpiracao;
+	public void setCarroModelo(String carroModelo) {
+		this.carroModelo = carroModelo;
 	}
 
-	public List<Veiculo> getVeiculo() {
-		return veiculo;
+	public String getCarroCor() {
+		return carroCor;
 	}
 
-	public void setVeiculo(List<Veiculo> veiculo) {
-		this.veiculo = veiculo;
+	public void setCarroCor(String carroCor) {
+		this.carroCor = carroCor;
 	}
 
-	public Corrida getCorrida() {
-		return corrida;
+	public String getCarroAno() {
+		return carroAno;
 	}
 
-	public void setCorrida(Corrida corrida) {
-		this.corrida = corrida;
+	public void setCarroAno(String carroAno) {
+		this.carroAno = carroAno;
 	}
+
+	public String getCarroPlaca() {
+		return carroPlaca;
+	}
+
+	public void setCarroPlaca(String carroPlaca) {
+		this.carroPlaca = carroPlaca;
+	}
+
+	public List<Corrida> getCorridas() {
+		return corridas;
+	}
+
+	public void setCorridas(List<Corrida> corridas) {
+		this.corridas = corridas;
+	}
+
+	
 }
