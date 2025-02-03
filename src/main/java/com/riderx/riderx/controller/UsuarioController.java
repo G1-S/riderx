@@ -22,9 +22,9 @@ import com.riderx.riderx.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
 
 	@Autowired
@@ -60,7 +60,7 @@ public class UsuarioController {
 	}
     
 
-	@PostMapping("/cadastrar")
+	@PostMapping(value = "/cadastrar", produces = "application/json", consumes = "application/json")
 	public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario) {
 
 		return usuarioService.cadastrarUsuario(usuario)

@@ -34,9 +34,6 @@ public class CorridaController {
 	private CorridaRepository corridaRepository;
 
 	@Autowired
-	private CaronaRepository veiculoRepository;
-	
-	@Autowired
 	private CorridaService corridaService;
 
 	@GetMapping("/all")
@@ -58,20 +55,20 @@ public class CorridaController {
 
 	@PostMapping
 	public ResponseEntity<Corrida> post(@Valid @RequestBody Corrida corrida) {
-		if (veiculoRepository.existsById(corrida.getVeiculo().getId()))
+		if (corridaRepository.existsById(corrida.getCarona().getId()))
 			return ResponseEntity.status(HttpStatus.CREATED).body(corridaRepository.save(corrida));
 
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O Veiculo não existe!", null);
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A carona não existe!", null);
 	}
 
 	@PutMapping
 	public ResponseEntity<Corrida> put(@Valid @RequestBody Corrida corrida) {
 		if (corridaRepository.existsById(corrida.getId())) {
 
-			if (veiculoRepository.existsById(corrida.getVeiculo().getId()))
+			if (corridaRepository.existsById(corrida.getCarona().getId()))
 				return ResponseEntity.status(HttpStatus.OK).body(corridaRepository.save(corrida));
 
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O veiculo não foi encontrado!", null);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A carona não foi encontrada!", null);
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}

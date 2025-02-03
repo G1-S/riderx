@@ -47,18 +47,19 @@ public class Corrida {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("corrida")
-	private Carona veiculo;
+	private Carona carona;
 	
 	@ManyToOne
 	@JoinColumn(name = "motorista_id", nullable = false)
 	private Usuario usuario;
 	
-	public Carona getVeiculo() {
-		return veiculo;
+	
+	public Carona getCarona() {
+		return carona;
 	}
 
-	public void setVeiculo(Carona veiculo) {
-		this.veiculo = veiculo;
+	public void setCarona(Carona carona) {
+		this.carona = carona;
 	}
 
 	public Long getId() {
