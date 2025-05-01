@@ -22,9 +22,9 @@ import com.riderx.riderx.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
 
 	@Autowired
@@ -47,6 +47,10 @@ public class UsuarioController {
 			.orElse(ResponseEntity.notFound().build());
 	}
 	
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome){
+		return ResponseEntity.ok(usuarioRepository.findAllByNomeContainingIgnoreCase(nome));
+	}
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin){
 		
@@ -56,7 +60,7 @@ public class UsuarioController {
 	}
     
 
-	@PostMapping("/cadastrar")
+	@PostMapping(value = "/cadastrar", produces = "application/json", consumes = "application/json")
 	public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario) {
 
 		return usuarioService.cadastrarUsuario(usuario)
@@ -73,4 +77,6 @@ public class UsuarioController {
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 		
 	}
+	
+	
 }

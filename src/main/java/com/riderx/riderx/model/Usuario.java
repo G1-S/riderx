@@ -3,6 +3,7 @@ package com.riderx.riderx.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -10,6 +11,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -45,13 +48,35 @@ public class Usuario {
 
 	private String foto;
 
-	@NotNull(message = "Digite um se for motorista ou zero para passageiro...")
+	@NotNull(message = "Digite 1 se for motorista ou 0 para passageiro...")
 	private Boolean tipo; // se for 1 significa que é motorista
-
+	
+	@Size(min = 16, max = 16)
+	public String cartaoNumero; 
+	
+	@Size(min = 3, max = 3)
+	public String cartaoCVV;
+	
+	@Size(min = 7, max = 50)
+	public String cartaoNome; 
+	
+	@Size(min = 5, max = 5)
+	public String cartaoExpiracao; 
+	
+	private String carroMarca;
+	
+	private String carroModelo;
+	
+	private String carroCor;
+	
+	private String carroAno;
+	
+	private String carroPlaca;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
-	private List<Veiculo> veiculo;
-
+	@JsonManagedReference
+	private List<Corrida> corridas;
+	
 	public Long getId() {
 		return id;
 	}
@@ -107,12 +132,87 @@ public class Usuario {
 	public void setTipo(Boolean tipo) {
 		this.tipo = tipo;
 	}
-
-	public List<Veiculo> getVeiculo() {
-		return veiculo;
+	
+	
+	public String getCartaoNumero() {
+		return cartaoNumero;
 	}
 
-	public void setVeiculo(List<Veiculo> veiculo) {
-		this.veiculo = veiculo;
+	public void setCartaoNumero(String cartaoNumero) {
+		this.cartaoNumero = cartaoNumero;
 	}
+
+	public String getCartaoCVV() {
+		return cartaoCVV;
+	}
+
+	public void setCartaoCVV(String cartaoCVV) {
+		this.cartaoCVV = cartaoCVV;
+	}
+
+	public String getCartaoNome() {
+		return cartaoNome;
+	}
+
+	public void setCartaoNome(String cartaoNome) {
+		this.cartaoNome = cartaoNome;
+	}
+
+	public String getCartaoExpiracao() {
+		return cartaoExpiracao;
+	}
+
+	public void setCartaoExpiracao(String cartaoExpiracao) {
+		this.cartaoExpiracao = cartaoExpiracao;
+	}
+
+	public String getCarroMarca() {
+		return carroMarca;
+	}
+
+	public void setCarroMarca(String carroMarca) {
+		this.carroMarca = carroMarca;
+	}
+
+	public String getCarroModelo() {
+		return carroModelo;
+	}
+
+	public void setCarroModelo(String carroModelo) {
+		this.carroModelo = carroModelo;
+	}
+
+	public String getCarroCor() {
+		return carroCor;
+	}
+
+	public void setCarroCor(String carroCor) {
+		this.carroCor = carroCor;
+	}
+
+	public String getCarroAno() {
+		return carroAno;
+	}
+
+	public void setCarroAno(String carroAno) {
+		this.carroAno = carroAno;
+	}
+
+	public String getCarroPlaca() {
+		return carroPlaca;
+	}
+
+	public void setCarroPlaca(String carroPlaca) {
+		this.carroPlaca = carroPlaca;
+	}
+
+	public List<Corrida> getCorridas() {
+		return corridas;
+	}
+
+	public void setCorridas(List<Corrida> corridas) {
+		this.corridas = corridas;
+	}
+
+	
 }
